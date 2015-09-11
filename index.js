@@ -7,7 +7,7 @@ var creds = require('./google-generated-creds.json');
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
+app.get('/sessions.json', function (req, res) {
   my_sheet.useServiceAccountAuth(creds, function(err){
     if(err) {
       console.log('err', err);
@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
 });
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(3030, function () {
   var host = server.address().address;
   var port = server.address().port;
 
