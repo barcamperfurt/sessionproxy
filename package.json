@@ -1,0 +1,15 @@
+{
+  "name": "sessionwall",
+  "version": "1.0.0",
+  "description": "reads session entries from gdocs and poops out json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "google-spreadsheet": "^1.0.1"
+  }
+}
