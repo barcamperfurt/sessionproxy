@@ -7,6 +7,12 @@ var creds = require('./google-generated-creds.json');
 var express = require('express');
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/sessions.json', function (req, res) {
   my_sheet.useServiceAccountAuth(creds, function(err){
     if(err) {
@@ -26,12 +32,17 @@ app.get('/sessions.json', function (req, res) {
       var returnData = [];
       sheet1.getRows( function( err, rows ){
         Object.keys(rows).forEach(function (propKey) {
-          if(rows[propKey].zeitstempel && rows[propKey].deinname && rows[propKey].deinesession) {
-            returnData.push({
+          if(rows[propKey].zeitstempel && rows[propKey].deinname && rows[propKey].deinsessiontitel) {
+            var sessionObject = {
               zeit: rows[propKey].zeitstempel,
               name: rows[propKey].deinname,
-              session: rows[propKey].deinesession
-            });
+              titel: rows[propKey].deinsessiontitel
+            }
+            if (rows[propKey].deinesession) {
+              sessionObject.session = rows[propKey].deinesession;
+            }
+
+            returnData.push(sessionObject);
           }
         });
         res.json(returnData);
