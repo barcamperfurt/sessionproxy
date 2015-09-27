@@ -31,7 +31,7 @@ app.get('/sessions.json', function (req, res) {
 
       var returnData = [];
       sheet1.getRows( function( err, rows ){
-        Object.keys(rows).forEach(function (propKey) {
+        Object.keys(rows).reverse().forEach(function (propKey) {
           if(rows[propKey].zeitstempel && rows[propKey].deinname && rows[propKey].deinsessiontitel) {
             var sessionObject = {
               zeit: rows[propKey].zeitstempel,
